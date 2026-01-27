@@ -64,4 +64,4 @@ cd crawl_NU
 scrapy crawl NU -o output.json
 ```
 
-Start RAG: Open pipeline.ipynb and run all cells to start the interactive search.
+#### Start RAG: Open pipeline.ipynb and run all cells to start the interactive search.

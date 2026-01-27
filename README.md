@@ -39,6 +39,7 @@ git clone https://github.com/JohnHuo-coder/NU-Faculty-Expertise-RAG.git
 cd NU-Faculty-Expertise-RAG
 ```
 2. Setup Environment
+
 Create and activate a virtual environment:
 ```bash
 python -m venv .venv
@@ -46,6 +47,7 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 3. Configure Credentials
+
 Create a .env file in the root directory:
 ```bash
 OPENAI_API_KEY=your_openai_key_here
@@ -55,6 +57,7 @@ USER_AGENT = "Mozilla/5.0 (LangChain)"
 LANGCHAIN_ENDPOINT = 'https://api.smith.langchain.com'
 ```
 4. Run the Pipeline
+
 Crawl Data:
 ```bash
 cd crawl_NU

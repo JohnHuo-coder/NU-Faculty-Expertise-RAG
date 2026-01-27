@@ -30,13 +30,15 @@ Crawler: Scrapy
 ├── .gitignore             # Git ignore file (excludes .env, .venv, etc.)
 ├── scrapy.cfg             # Scrapy configuration file
 └── requirements.txt       # Project dependencies
+```
 
-🚀 Quick Start
+## 🚀 Quick Start
 1. Clone the Repository
-Bash
+```bash
 git clone https://github.com/JohnHuo-coder/NU-Faculty-Expertise-RAG.git
 cd NU-Faculty-Expertise-RAG
-2. Setup Environment
+```
+3. Setup Environment
 Create and activate a virtual environment:
 
 Bash

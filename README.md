@@ -33,22 +33,22 @@ Crawler: Scrapy
 ```
 
 ## 🚀 Quick Start
-1. Clone the Repository
+###  Clone the Repository
 ```bash
 git clone https://github.com/JohnHuo-coder/NU-Faculty-Expertise-RAG.git
 cd NU-Faculty-Expertise-RAG
 ```
-2. Setup Environment
+### Setup Environment
 
-Create and activate a virtual environment:
+#### Create and activate a virtual environment:
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
-3. Configure Credentials
+### Configure Credentials
 
-Create a .env file in the root directory:
+#### Create a .env file in the root directory:
 ```bash
 OPENAI_API_KEY=your_openai_key_here
 LANGCHAIN_API_KEY=your_langsmith_key_here
@@ -56,9 +56,9 @@ LANGCHAIN_TRACING_V2=true
 USER_AGENT = "Mozilla/5.0 (LangChain)"
 LANGCHAIN_ENDPOINT = 'https://api.smith.langchain.com'
 ```
-4. Run the Pipeline
+### Run the Pipeline
 
-Crawl Data:
+#### Crawl Data:
 ```bash
 cd crawl_NU
 scrapy crawl NU -o output.json

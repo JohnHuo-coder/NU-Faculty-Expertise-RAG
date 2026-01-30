@@ -39,7 +39,6 @@ class NuSpider(scrapy.Spider):
         if not main:
             return
         result = {}
-        main = response.css("#main-content")
         name = main.css("h1#page-title::text").getall()
         name = " ".join(t.strip() for t in name if t.strip())
         result["name"] = name

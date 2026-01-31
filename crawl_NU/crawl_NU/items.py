@@ -9,3 +9,4 @@ import scrapy
 class LabItem(scrapy.Item):
     name = scrapy.Field()
     description = scrapy.Field()
+    leader = scrapy.Field()

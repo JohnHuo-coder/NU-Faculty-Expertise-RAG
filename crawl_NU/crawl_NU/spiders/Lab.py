@@ -27,13 +27,16 @@ class LabSpider(scrapy.Spider):
         for node in main.css("h2"):
             labItem = LabItem()
             lab_name = self.extract_pure_link(node)
-            lab_desc = self.get_description(node)
+            lab_desc, lab_leader = self.get_description(node)
             labItem["name"] = lab_name
             labItem["description"] = lab_desc
+            if lab_leader:
+                labItem["leader"] = lab_leader
             yield labItem
 
     def get_description(self, h2_node):
         lines = []
+        leader_name = ""
         for node in h2_node.xpath("following-sibling::node()"):
             if isinstance(node.root, str): 
                 text = node.get().strip()
@@ -41,12 +44,13 @@ class LabSpider(scrapy.Spider):
                     lines.append(text)
                 continue
             if node.root.tag == "p" and node.root.get("class") != "back_to_top":
-                text = self.extract_p_with_links(node)
+                text, name = self.extract_p_with_leader_name(node)
+                leader_name = name
                 lines.append(text)
             else:
                 break
         description = "\n".join(lines)
-        return description
+        return description, leader_name
     
     def extract_pure_link(self, a):
         text = a.css("::text").get()
@@ -54,8 +58,9 @@ class LabSpider(scrapy.Spider):
         formatted_text = f'{text} ({href})'
         return formatted_text
     
-    def extract_p_with_links(self, p):
+    def extract_p_with_leader_name(self, p):
         parts = []
+        name = ""
         for node in p.xpath("node()"):
             if isinstance(node.root, str): 
                 text = node.get()
@@ -69,9 +74,10 @@ class LabSpider(scrapy.Spider):
                     parts.append(f"{text} ({href})")
                 else:
                     parts.append(text)
+                name = text
             else:
                 text = node.xpath("string()").get()
                 if text:
                     parts.append(text)
-
-        return "".join(parts).strip()
+        content = "".join(parts).strip()
+        return content, name

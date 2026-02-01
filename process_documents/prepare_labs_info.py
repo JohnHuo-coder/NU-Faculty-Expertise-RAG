@@ -16,8 +16,10 @@ def prepare_labs_info(doc_path):
         ]
         full_search_text = "\n".join([p for p in search_parts])
         metadata = {
+            "name": item.get('name', ''),
             "leader": item.get("leader"),
-            "department": "Computer Science"
+            "department": "Computer Science",
+            "source_type": "lab"
         }
         if full_search_text.strip():
             doc = Document(page_content=full_search_text, metadata=metadata)

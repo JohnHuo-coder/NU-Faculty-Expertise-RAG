@@ -24,3 +24,20 @@ class ProfandLabSearch(BaseModel):
         for field, value in data.items():
             if value is not None and value != "":
                 print(f"{field}: {value}")
+
+
+class RouteQuery(BaseModel):
+    """Route a user query to the most relevant prompt based on their intent."""
+    
+    target: Literal["academic_search", "general_research"] = Field(
+        ...,
+        description="""Choose the destination based on the user's intent:
+        - 'academic_search': Select this if the query relates to Northwestern University (NU) specifically. 
+          This includes searching for specific professors, identifying research labs, inquiring about 
+          departmental faculty, or finding which groups at NU work on a particular technology.
+        - 'general_research': Select this if the query is a general scientific or technical question 
+          that does NOT require Northwestern-specific data. This includes explaining terminologies 
+          (e.g., 'What is Cross-Entropy?'), helping with general research methodology, or 
+          conceptual explanations that apply universally regardless of the institution.
+        """
+    )

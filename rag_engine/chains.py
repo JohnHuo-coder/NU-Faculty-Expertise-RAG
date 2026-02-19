@@ -7,7 +7,7 @@ from qdrant_client import models
 
 from rag_engine.prompts import query_router_prompt, query_analyzer_prompt, query_translation_prompt, rag_chain_prompt
 from rag_engine.schemas import RouteQuery, ProfandLabSearch
-from rag_engine.utils import get_unique_union, format_docs
+from rag_engine.utils import reciprocal_rank_fusion, format_docs
 
 system_content_choice_1 = """You are an expert academic research assistant specializing in the Northwestern University McCormick School of Engineering faculty and research laboratories.
 
@@ -74,7 +74,7 @@ def query_logic(structured_obj, generated_queries, retriever):
     for q in queries:
         docs = retriever.invoke(q, config={"configurable": {"search_kwargs": {"filter": q_filter}}})
         all_docs.append(docs)
-    return get_unique_union(all_docs)
+    return reciprocal_rank_fusion(all_docs)
 
 def get_retrieval_chain(llm, retriever):
     # Query structuring for metadata filters

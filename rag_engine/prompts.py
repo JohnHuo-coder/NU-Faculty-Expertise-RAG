@@ -46,6 +46,11 @@ def query_router_prompt():
 def rag_chain_prompt():
     prompt = ChatPromptTemplate.from_messages([
         ("system", "{system_message}"),
-        ("human", "Context:\n{context}\n\nQuestion: {question}")
+        (
+            "human",
+            "Context:\n{context}\n\n"
+            "{chat_history}"
+            "Question: {question}"
+        ),
     ])
     return prompt

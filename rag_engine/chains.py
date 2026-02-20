@@ -98,8 +98,19 @@ def get_rag_chain(llm, retriever):
     retrieval_chain = get_retrieval_chain(llm, retriever)
     prompt = rag_chain_prompt()
 
+    def get_question(input_dict):
+        return input_dict.get("question", "")
+
+    def get_chat_history(input_dict):
+        return input_dict.get("chat_history", "")
+
     rag_chain = (
-        {"system_message": system_message_chain, "context": retrieval_chain, "question": RunnablePassthrough()}
+        {
+            "system_message": system_message_chain,
+            "context": retrieval_chain,
+            "question": RunnableLambda(get_question),
+            "chat_history": RunnableLambda(get_chat_history),
+        }
         | prompt
         | llm
         | StrOutputParser()
